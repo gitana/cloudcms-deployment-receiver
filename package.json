@@ -1,0 +1,13 @@
+{
+    "name": "cloudcms-http-deployment-receiver",
+    "description": "Cloud CMS Http Deployment Receiver",
+    "version": "1.0.0",
+    "private": true,
+    "dependencies": {
+        "async": "^2.6.1",
+        "cloudcms-server": "0.9.154",
+        "fs-extra": "^7.0.0",
+        "node-json-merge": "^1.0.0",
+        "unzip2": "^0.2.5"
+    }
+}
