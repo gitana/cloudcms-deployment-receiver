@@ -1,27 +1,57 @@
-module.exports = function(config) {
-
-    if (!config) {
-        config = {};
-    }
+module.exports = function() {
 
     var server = require("cloudcms-server/server");
-    var receiver = require("./lib/receiver")(config);
 
-    // register some routes
-    server.routes(function(app, callback) {
+    var executeHandlers = [];
+    var entryHandlers = [];
+    var beforeHandlers = [];
+    var afterHandlers = [];
 
-        app.post("/push", function(req, res) {
-            receiver.push(req, res)
+    var r = {};
+
+    r.execute = function(executeHandler) {
+        executeHandlers.push(executeHandler);
+    };
+
+    r.entry = function(entryHandler) {
+        entryHandlers.push(entryHandler);
+    };
+
+    r.before = function(beforeHandler) {
+        beforeHandlers.push(beforeHandler);
+    };
+
+    r.after = function(afterHandler) {
+        afterHandlers.push(afterHandler);
+    };
+
+    r.start = function(config, callback) {
+
+        if (typeof(config) === "function") {
+            callback = config;
+            config = {};
+        }
+
+        var receiver = require("./lib/receiver")(executeHandlers, entryHandlers, beforeHandlers, afterHandlers);
+
+        // register some routes
+        server.routes(function(app, callback) {
+
+            app.post("/push", function(req, res) {
+                receiver.push(req, res)
+            });
+
+            app.post("/status/:id", function(req, res) {
+                receiver.status(req, res, req.params["id"]);
+            });
+
+            callback();
         });
 
-        app.post("/status/:id", function(req, res) {
-            receiver.status(req, res, req.params["id"]);
-        });
+        // start the server
+        server.start(config, callback);
+    };
 
-        callback();
-    });
+    return r;
 
-    // start the server
-    server.start(config);
-
-};
+}();
