@@ -70,4 +70,5 @@ This runs when the deployment package has completed its deployment.
     
 ## Example
 
-To see a full-fledged example of this in action, check out the 
+To see a full-fledged example of this in action, check out:
+[https://github.com/gitana/sdk/tree/master/http-deployment-receiver](https://github.com/gitana/sdk/tree/master/http-deployment-receiver)
