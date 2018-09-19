@@ -1,7 +1,7 @@
 {
     "name": "cloudcms-http-deployment-receiver",
     "description": "Cloud CMS Http Deployment Receiver",
-    "version": "1.0.1",
+    "version": "1.0.w",
     "dependencies": {
         "async": "^2.6.1",
         "cloudcms-server": "0.9.154",
