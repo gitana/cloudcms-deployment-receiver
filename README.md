@@ -18,7 +18,7 @@ And then in your code, you'd do:
 
 This will start an HTTP server (using Express).  The HTTP server exposes two controller methods:
 
-    POST /push``
+    POST /push
     
     GET /status/:id 
     
