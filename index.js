@@ -41,7 +41,7 @@ module.exports = function() {
                 receiver.push(req, res)
             });
 
-            app.post("/status/:id", function(req, res) {
+            app.get("/status/:id", function(req, res) {
                 receiver.status(req, res, req.params["id"]);
             });
 
